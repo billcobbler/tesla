@@ -82,6 +82,8 @@ func (c Client) TokenExpired() bool {
 
 // authorize uses the given Auth credentials to authenticate with the the Tesla API
 func (c Client) authorize(auth *Auth) (*Token, error) {
+	// clear the current token
+	c.Token = nil
 	u, _ := url.Parse(c.Endpoint.String())
 	u.Path = path.Join("oauth/token")
 	auth.GrantType = "password"
